@@ -1,15 +1,6 @@
-import csv
+import pandas as pd
 
 def csv_read(filename):
-    peopleList = []
+    csvFile = pd.read_csv("Test Data/" + filename)
 
-    myFile = open("Test Data/" + filename, mode = "r")
-
-    reader = csv.reader(myFile)
-
-    for each in reader:
-        peopleList.append(each)
-
-    myFile.close()
-
-    return(peopleList)
+    return(csvFile)
