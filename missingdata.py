@@ -31,7 +31,21 @@ for i in range(len(myList)):
     myDict[passengerID]['fare'] = myList[i][8]
     myDict[passengerID]['cabin'] = myList[i][9]
     myDict[passengerID]['embarked'] = myList[i][10]
-    print(myList[i])
     print(myDict[passengerID])
 
+for i in range(len(myList)):
+    passengerID = myList[i][0]
+    for x in range(len(myList[i])):
+        if (myList[i][x] == '' or myList[i][x] == ' ') and (myList[i][0] != 'incomplete'):
+            myList[i].insert(0, 'incomplete')
+            break
+        
+        elif (myList[i][0] != 'complete' and myList[i][0] != 'incomplete' and x == 10):
+            myList[i].insert(0, 'complete')
+        else:
+            pass
 
+for i in range(len(myList)):
+    passengerID = myList[i][0]
+    print(myList[i])
+    print(myDict[passengerID])
