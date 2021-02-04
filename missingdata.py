@@ -1,48 +1,37 @@
-import fileinput
-global testDataDict
-testDataDict = {}
+import csv
+global myList
+global myDict
+myList = []
+myDict = {}
+
+def read_csv(filename):
+    myFile = open(filename, "r")
+    global myList
+    myList = []
+    x = csv.reader(myFile)
+    for each in x:
+        myList.append(each)
+    myFile.close()
+    myList.pop(0)
+    return(myList)
+
+read_csv('testdata/test.csv')
+
+for i in range(len(myList)):
+    passengerID = myList[i][0]
+    myDict[passengerID] = {}
+    myDict[passengerID]['passengerID'] = myList[i][0]
+    myDict[passengerID]['class'] = myList[i][1]
+    myDict[passengerID]['name'] = myList[i][2]
+    myDict[passengerID]['gender'] = myList[i][3]
+    myDict[passengerID]['age'] = myList[i][4]
+    myDict[passengerID]['siblings/spouses'] = myList[i][5]
+    myDict[passengerID]['parents/children'] = myList[i][6]
+    myDict[passengerID]['ticketNo'] = myList[i][7]
+    myDict[passengerID]['fare'] = myList[i][8]
+    myDict[passengerID]['cabin'] = myList[i][9]
+    myDict[passengerID]['embarked'] = myList[i][10]
+    print(myList[i])
+    print(myDict[passengerID])
 
 
-testdata = open('testdata/test.csv', 'r')
-x = 1
-for i in testdata:
-    if x == 1:
-        pass
-    else:
-        line = i.split('\n')
-        stringLine = str(line)
-        if stringLine.count('"') == 2:
-            print('There are two " in the string')
-            pass
-        else:
-            index = 0
-            for element in stringLine:
-                if (element == '"' and stringLine[index - 1] == ',') or (element == '"' and stringLine[index + 1] == ','):
-                    index+=1
-                    pass
-                else:
-                    stringLine = stringLine[0:(index-1)] + stringLine [(index+1):len(stringLine)]
-                    index+=1
-        initSplit = str(line).split('"')
-        name = initSplit[1]
-        leftList = str(initSplit[0]).split(',')
-        rightList = str(initSplit[2]).split(',')
-        del rightList[0]
-        print(rightList)
-        passengerID = leftList[0]
-        testDataDict[passengerID] = {}
-        testDataDict[passengerID]['passengerID'] = leftList[0]
-        testDataDict[passengerID]['class'] = leftList[1]
-        testDataDict[passengerID]['name'] = name
-        testDataDict[passengerID]['gender'] = rightList[0]
-        testDataDict[passengerID]['age'] = rightList[1]
-        testDataDict['siblingsspouses'] = rightList[2]
-        testDataDict['parentschildren'] = rightList[3]
-        testDataDict['ticketNo'] = rightList[4]
-        testDataDict['fare'] = rightList[5]
-        testDataDict['cabin'] = rightList[6]
-        testDataDict['embarked'] = rightList[7]
-    x+=1
-
-"""for (key) in testDataDict:
-    print(key, testDataDict[key])"""
