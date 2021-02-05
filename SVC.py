@@ -43,6 +43,6 @@ submission = pd.DataFrame({"PassengerId": test_data["PassengerId"], "Survived": 
 
 
 # Send to csv without indexes
-submission.to_csv("Test Data/submission.csv", index = False)
+submission.to_csv("testdata/submission.csv", index = False)
 
 w = clf.coef_[0] # The coefficients of the algo :D

@@ -39,7 +39,7 @@ survived = clf.predict(X_test)
 submission = pd.DataFrame({"PassengerId": test_data["PassengerId"], "Survived": survived})
 
 # Send to csv without indexes (idk why you'd ever need indexes.)
-submission.to_csv("Test Data/submission.csv", index = False)
+submission.to_csv("testdata/submission.csv", index = False)
 
 print("File submission.csv, has been created")
 
