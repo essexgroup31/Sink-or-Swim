@@ -2,8 +2,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn import svm
 
-train_data = pd.read_csv("Test Data/train.csv") # train_data is the data we're training our ML algo on
-test_data = pd.read_csv("Test Data/test.csv")   # test_data is the data we're testing our ML algo on
+train_data = pd.read_csv("testdata/train.csv") # train_data is the data we're training our ML algo on
+test_data = pd.read_csv("testdata/test.csv")   # test_data is the data we're testing our ML algo on
 
 features = ["Pclass", "Sex", "SibSp", "Parch"] # The attributes we want currently
 # I've removed some of the attributes because they aren't complete in the csv files. (TODO)

@@ -7,8 +7,8 @@ from sklearn import tree
 
 
 
-train_data = pd.read_csv("Test Data/train.csv")
-test_data = pd.read_csv("Test Data/test.csv")
+train_data = pd.read_csv("testdata/train.csv")
+test_data = pd.read_csv("testdata/test.csv")
 
 features = ["Pclass", "Sex", "SibSp", "Parch"]
 
