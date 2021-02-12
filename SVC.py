@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 from sklearn import svm
 
 
-train_data = pd.read_csv("Test Data/train.csv") # train_data is the data we're training our ML algo on
-test_data = pd.read_csv("Test Data/test.csv")   # test_data is the data we're testing our ML algo on
+train_data = pd.read_csv("testdata/train.csv") # train_data is the data we're training our ML algo on
+test_data = pd.read_csv("testdata/test.csv")   # test_data is the data we're testing our ML algo on
 
 
 features = ["Pclass", "Sex", "SibSp", "Parch"] # The attributes we want currently
@@ -43,6 +43,6 @@ submission = pd.DataFrame({"PassengerId": test_data["PassengerId"], "Survived": 
 
 
 # Send to csv without indexes
-submission.to_csv("Test Data/submission.csv", index = False)
+submission.to_csv("testdata/submission.csv", index = False)
 
 w = clf.coef_[0] # The coefficients of the algo :D
