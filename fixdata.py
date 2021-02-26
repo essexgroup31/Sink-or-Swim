@@ -10,7 +10,7 @@ def fixData(trainFileName, testFileName, imputer = "simple", strategy = "mean"):
     neededFeatures = ["Pclass", "Sex", "Age", "SibSp", "Parch", "Fare", "Embarked"]
     featuresForDummies = ["Embarked", "Sex"]
 
-    testSurvived = training_data["Survived"]
+    trainSurvived = training_data["Survived"]
     passengerID = testing_data["PassengerId"]
 
     training_data = training_data[neededFeatures]
@@ -38,4 +38,4 @@ def fixData(trainFileName, testFileName, imputer = "simple", strategy = "mean"):
 
     print("Data fixed.")
 
-    return(dummied_test, dummied_train, testSurvived, passengerID)
+    return(dummied_test, dummied_train, trainSurvived, passengerID)
