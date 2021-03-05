@@ -1,3 +1,0 @@
-https://towardsdatascience.com/machine-learning-with-the-titanic-dataset-7f6909e58280
-
-https://www.kaggle.com/alexisbcook/titanic-tutorial#Part-1:-Get-started
