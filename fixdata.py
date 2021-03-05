@@ -2,19 +2,23 @@ from sklearn import impute
 import numpy as np
 import pandas as pd
 
-def fixData(trainFileName, testFileName, imputer = "simple", strategy = "mean"):
+def fixData(trainFileName, testFileName, features, imputer = "simple", strategy = "mean"):
 
+    print("Fixing Data\n")
     training_data = pd.read_csv(trainFileName)
     testing_data = pd.read_csv(testFileName)
 
-    neededFeatures = ["Pclass", "Sex", "Age", "SibSp", "Parch", "Fare", "Embarked"]
     featuresForDummies = ["Embarked", "Sex"]
 
     trainSurvived = training_data["Survived"]
     passengerID = testing_data["PassengerId"]
 
-    training_data = training_data[neededFeatures]
-    testing_data = testing_data[neededFeatures]
+    features2 = []
+    for i in range(len(features)):
+        features2.append(features[i])
+
+    training_data = training_data[features2]
+    testing_data = testing_data[features2]
 
     tr_data = pd.get_dummies(training_data, columns=featuresForDummies)
     te_data = pd.get_dummies(testing_data, columns=featuresForDummies)
@@ -35,7 +39,5 @@ def fixData(trainFileName, testFileName, imputer = "simple", strategy = "mean"):
 
     imp.fit(tr_data)
     dummied_train = imp.transform(tr_data)
-
-    print("Data fixed.")
 
     return(dummied_test, dummied_train, trainSurvived, passengerID)

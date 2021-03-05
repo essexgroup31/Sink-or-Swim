@@ -2,51 +2,64 @@ import pandas as pd
 from sklearn import svm
 from sklearn import tree
 from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import cross_val_score
+import inspect
 
-def LinearSVC(trainData, testData, trainSurvived, passengerID):
 
-    clf = svm.LinearSVC(max_iter=100000)
-
+def linearSVC(trainData, testData, trainSurvived, passengerID):
+    
+    print("Predicting Data using LinearSVC")
+    clf = 0
+    clf = svm.LinearSVC(max_iter=10000000, C=0.2)
     clf.fit(trainData, trainSurvived)
-
     survived = clf.predict(testData)
-
     submission = pd.DataFrame({"PassengerId": passengerID, "Survived": survived})
 
-    return(submission)
+    simAcc = simulateAccuracy(clf, trainData, trainSurvived, cv=3)
+    
+    return (submission), simAcc
 
-def LogisticRegression(trainData, testData, trainSurvived, passengerID):
 
+def logisticRegression(trainData, testData, trainSurvived, passengerID):
+
+    print("Predicting Data using Logistic Regression")
     clf = LogisticRegression()
-
     clf.fit(trainData, trainSurvived)
-
     survived = clf.predict(testData)
-
     submission = pd.DataFrame({"PassengerId": passengerID, "Survived": survived})
 
-    return(submission)
+    simAcc = simulateAccuracy(clf, trainData, trainSurvived, cv=5)
 
-def RandomForest(trainData, testData, trainSurvived, passengerID):
+    return (submission), simAcc
 
-    clf = tree.DecisionTreeClassifier()#n_estimators = 1300)
 
+def randomForest(trainData, testData, trainSurvived, passengerID):
+
+    print("Predicting Data using Random Forest")
+    clf = tree.DecisionTreeClassifier()  # n_estimators = 1300)
     clf.fit(trainData, trainSurvived)
-
     survived = clf.predict(testData)
-
     submission = pd.DataFrame({"PassengerId": passengerID, "Survived": survived})
 
-    return(submission)
+    simAcc = simulateAccuracy(clf, trainData, trainSurvived, cv=5)
+
+    return (submission), simAcc
+
 
 def SVC(trainData, testData, trainSurvived, passengerID):
-
-    clf = svm.SVC(kernel="linear")
-
+    
+    print("Predicting Data using SVC")
+    clf = 0
+    clf = svm.SVC() #TODO Perhaps the kernel shouldn't be linear?
     clf.fit(trainData, trainSurvived)
-
     survived = clf.predict(testData)
-
     submission = pd.DataFrame({"PassengerId": passengerID, "Survived": survived})
 
-    return(submission)
+    simAcc = simulateAccuracy(clf, trainData, trainSurvived, cv=5)
+
+    return (submission), simAcc
+
+def simulateAccuracy(clf, trainData, trainSurvived, cv):
+    print("Simulating Accuracy for", (inspect.stack()[1].function))
+    scores = cross_val_score(clf, trainData, trainSurvived, cv=cv)
+    return scores
