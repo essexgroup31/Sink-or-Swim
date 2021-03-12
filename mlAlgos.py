@@ -5,6 +5,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import cross_val_score
 import inspect
 
+#These all take the inputs required, train a model, then test against that model, and then use cross validation to test how accurate they are
 
 def linearSVC(trainData, testData, trainSurvived, passengerID):
     
